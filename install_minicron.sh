@@ -20,7 +20,7 @@ then
         echo "Found ~/.ssh/ directory."
 else
         echo "Not found ~/.ssh/ directory, so create it..."
-        mkdir /home/${USER}/.ssh/
+        # mkdir /home/${USER}/.ssh/
 fi;
 
 
