@@ -20,18 +20,41 @@ then
         echo "Found ~/.ssh/ directory."
 else
         echo "Not found ~/.ssh/ directory, so create it..."
-        # mkdir /home/${USER}/.ssh/
+        mkdir /home/${USER}/.ssh/
 fi;
 
 
 
 VERSION="0.9.7"
 
-OS="linux-x86_64"
-
 echo "Installing mincron v$VERSION"
 
+if [[ $(uname -s) == "Linux" ]]
+then
+    if [[ $(uname -m) == "x86_64" ]]
+    then
+        OS="linux-x86_64"
+    else
+        OS="linux-x86"
+    fi
+elif [[ $(uname -s) == "Darwin" ]]
+then
+    OS="osx"
+else
+  echo "Unknown OS"
+  exit 1
+fi
+
 echo "OS detected as $OS"
+
+echo "Checking user authorisation"
+SUDO="sudo"
+if [[ "$EUID" -eq "0" ]]; then #is root
+    SUDO=""
+elif ! hash sudo 2>/dev/null; then # no sudo
+    echo "The install script either needs to be run as root or have permission to use sudo"
+    exit
+fi
 
 DOWNLOAD_FILE="https://github.com/jamesrwhite/minicron/releases/download/v$VERSION/minicron-$VERSION-$OS.tar.gz"
 # DOWNLOAD_FILE="http://localhost:8000/minicron-$VERSION-$OS.tar.gz"
