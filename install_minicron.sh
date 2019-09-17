@@ -33,15 +33,6 @@ echo "Installing mincron v$VERSION"
 
 echo "OS detected as $OS"
 
-echo "Checking user authorisation"
-SUDO="sudo"
-if [[ "$EUID" -eq "0" ]]; then #is root
-    SUDO=""
-elif ! hash sudo 2>/dev/null; then # no sudo
-    echo "The install script either needs to be run as root or have permission to use sudo"
-    exit
-fi
-
 DOWNLOAD_FILE="https://github.com/jamesrwhite/minicron/releases/download/v$VERSION/minicron-$VERSION-$OS.tar.gz"
 # DOWNLOAD_FILE="http://localhost:8000/minicron-$VERSION-$OS.tar.gz"
 TMP_TAR_LOCATION="/tmp/minicron-$VERSION-$OS.tar.gz"
