@@ -27,23 +27,9 @@ fi;
 
 VERSION="0.9.7"
 
-echo "Installing mincron v$VERSION"
+OS="linux-x86_64"
 
-if [[ $(uname -s) == "Linux" ]]
-then
-    if [[ $(uname -m) == "x86_64" ]]
-    then
-        OS="linux-x86_64"
-    else
-        OS="linux-x86"
-    fi
-elif [[ $(uname -s) == "Darwin" ]]
-then
-    OS="osx"
-else
-  echo "Unknown OS"
-  exit 1
-fi
+echo "Installing mincron v$VERSION"
 
 echo "OS detected as $OS"
 
